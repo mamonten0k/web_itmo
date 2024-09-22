@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "module": "ESNext",
+        "target": "ES2021",
+        "strict": true,
+        "esModuleInterop": true,
+        "skipLibCheck": true,
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "outDir": "./dist",
+    },
+    "include": [
+        "server/**/*"
+, "common/types/index.ts"    ],
+    "exclude": [
+        "node_modules"
+    ]
+    
+}
