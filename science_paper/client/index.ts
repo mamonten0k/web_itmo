@@ -1,5 +1,8 @@
 import {ThrottleType, Modifiers} from '../common/types';
 
+import {getWebVitals} from './services/api_service';
+import {selectNetworkThrottlingType} from './selectors';
+
 
 const dialog = document.getElementById('dialog') as HTMLDialogElement;
 
@@ -8,25 +11,20 @@ const input = document.getElementById('url') as HTMLInputElement;
 const dialogButton = document.getElementById('show_dialog');
 const webVitalsButton = document.getElementById('check_web_vitals');
 
-dialogButton?.addEventListener('click', openDialog);
+dialogButton?.addEventListener('click', onOpenDialog);
 
-async function openDialog() {
+async function onOpenDialog() {
     dialog.showModal();
 
-    webVitalsButton?.addEventListener('click', getWebVitals);
+    webVitalsButton?.addEventListener('click', onGetWebVitals);
     addEventListener("close", () => {
-        webVitalsButton?.removeEventListener('click', getWebVitals);
+        webVitalsButton?.removeEventListener('click', onGetWebVitals);
     });
 }
 
-function getSelectedNetworkThrottlingType() {
-    const radioBtns = dialog.querySelectorAll('[name="network"]') as NodeListOf<HTMLInputElement>;
-    return Array.from(radioBtns)?.filter(btn => btn.checked)[0].value;
-}
-
-async function getWebVitals() {
+async function onGetWebVitals() {
     const value = input?.value;
-    const throttleType = getSelectedNetworkThrottlingType() ?? ThrottleType.NO_THROTTLE;
+    const throttleType = selectNetworkThrottlingType() ?? ThrottleType.NO_THROTTLE;
 
     if (!value || !webVitalsButton) {
         return;
@@ -35,25 +33,17 @@ async function getWebVitals() {
     try {
         webVitalsButton.setAttribute('disabled', 'true');
 
-        const res = await fetch('/api/web-vitals', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-              },
-            body: JSON.stringify({
-                url: 'http://xmlns.com/foaf/spec/#term_Person',
-                modifiers: [
-                    Modifiers.ADD_LIGHTHOUSE_REPORT,
-                    Modifiers.ENABLE_NETWORK_THROTTLING
-                ],
-                throttleType,
-            }),
+        const {data} = await getWebVitals({
+            url: 'http://xmlns.com/foaf/spec/#term_Person',
+            modifiers: [
+                Modifiers.ADD_LIGHTHOUSE_REPORT,
+                Modifiers.ENABLE_NETWORK_THROTTLING
+            ],
+            throttleType,
         });
 
         const container = dialog.querySelector('#results');
         if (container) {
-            const {data} = await res.json();
             const audits = data.lhr?.audits;
     
             const first_contentful_paint = audits['first-contentful-paint']?.displayValue;
