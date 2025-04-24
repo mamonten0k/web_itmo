@@ -3,71 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web-Vitals checker</title>
+    <title>Web-Vitals Checker</title>
+    <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
-    <div id="container"
-         style="display: flex; flex-direction: column; align-items: center; padding: 20px; gap: 20px; font-family: 'Courier New', Courier, monospace;">
-        <h1>WEB-VITALS CHECKER</h1>
+    <div id="container">
+        <h1>Web-Vitals Checker</h1>
 
-        <label for="url">enter URL:</label>
-        <input  id="url"
-                type="url"
-                required
-                style="width: 100%; display: flex">
+        <div class="input-group">
+            <label for="url">Enter URL to analyze:</label>
+            <input id="url"
+                   type="url"
+                   required
+                   placeholder="https://example.com">
+        </div>
+        
         <button id="show_dialog"
+                class="btn"
                 type="button"
-                aria-label="Check website CRP monitoring">
-            evaluate metrics
+                aria-label="Check website performance">
+            Evaluate Metrics
         </button>
 
-        <dialog id="dialog"
-                style="width: 80%;">
-            <div id="options-container">
-                <h2>SETTINGS</h2>
-                <strong>network throttling settings:</strong>
-
-                <div>
-                    <input type="radio"
-                           id="fast_3g"
-                           name="network"
-                           value="0"/>
-                    <label for="fast_3g">fast 3G</label>
-                </div>
-
-                <div>
-                    <input type="radio" 
-                           id="slow_3g" 
-                           name="network" 
-                           value="3"/>
-                    <label for="slow_3g">slow 3G</label>
-                </div>
-
-                <div>
-                    <input type="radio"
-                           id="offline"
-                           name="network"
-                           value="2"/>
-                    <label for="offline">offline</label>
-                </div>
-
-                <div>
-                    <input type="radio"
-                           id="none"
-                           name="network"
-                           value="1"/>
-                    <label for="none">no throttle</label>
-                </div>
-
-
+        <dialog id="dialog">
+            <div class="dialog-header">
+                <h2>Test Settings</h2>
             </div>
+            
+            <div id="options-container">
+                <div class="radio-group">
+                    <strong>Network Throttling Settings:</strong>
+                    
+                    <div class="radio-option">
+                        <input type="radio"
+                               id="fast_3g"
+                               name="network"
+                               value="0"/>
+                        <label for="fast_3g">Fast 3G</label>
+                    </div>
+
+                    <div class="radio-option">
+                        <input type="radio" 
+                               id="slow_3g" 
+                               name="network" 
+                               value="3"/>
+                        <label for="slow_3g">Slow 3G</label>
+                    </div>
+
+                    <div class="radio-option">
+                        <input type="radio"
+                               id="offline"
+                               name="network"
+                               value="2"/>
+                        <label for="offline">Offline</label>
+                    </div>
+
+                    <div class="radio-option">
+                        <input type="radio"
+                               id="none"
+                               name="network"
+                               value="1"
+                               checked/>
+                        <label for="none">No Throttle (Default)</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="loading" class="loading" style="display: none;">
+                <div class="spinner"></div>
+                <p>Running performance tests...</p>
+                <p>This may take a minute or two</p>
+            </div>
+
+            <div id="error" class="error-message" style="display: none;"></div>
 
             <div id="results"></div>
 
-            <hr/>
-
-            <button id="check_web_vitals"
-                    style="margin-left: auto;">evaluate</button>
+            <div class="dialog-footer">
+                <button id="check_web_vitals" class="btn">Run Test</button>
+            </div>
         </dialog>
     </div>
 

@@ -12,8 +12,10 @@
         "outDir": "./dist",
     },
     "include": [
-        "server/**/*"
-, "common/types/index.ts"    ],
+        "server/**/*",
+        "client/**/*",
+        "common/types/index.ts"
+    ],
     "exclude": [
         "node_modules"
     ]

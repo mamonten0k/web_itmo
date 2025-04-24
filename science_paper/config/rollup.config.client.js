@@ -21,6 +21,7 @@ export default {
     terser(),
     copy({targets: [
         {src: `client/index.html`, dest: `dist/views`},
+        {src: `client/styles.css`, dest: `dist`},
     ]}),  
   ],
 };
