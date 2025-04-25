@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  web:
+    platform: linux/amd64
+    image: ${DOCKER_USERNAME}/science_paper:latest  # Will be replaced with your Docker Hub username
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - CHROME_PATH=/usr/bin/google-chrome
+    shm_size: '2gb'
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+    restart: unless-stopped
