@@ -1,6 +1,6 @@
-import {Request, Response} from 'express';
+import type {Request, Response} from 'express';
 
 
 export const indexController = (_req: Request, res: Response): void => {
-    res.render('index', {data: null, url: null});
+  res.render('index', {data: null, url: null});
 };

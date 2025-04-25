@@ -1,5 +1,5 @@
-import {REJECT_TIMESTAMP_MS} from "../common/constants";
-import {ThrottleType, Modifiers} from "../../common/types";
+import type {ThrottleType, Modifiers} from '../../common/types';
+import {REJECT_TIMESTAMP_MS} from '../common/constants';
 
 // Define types for API requests and responses
 interface WebVitalsRequest {
@@ -27,7 +27,7 @@ interface WebVitalsResponse {
  * @returns Promise with web vitals data
  */
 export async function getWebVitals(params: WebVitalsRequest): Promise<WebVitalsResponse> {
-    return await request<WebVitalsResponse>('/api/web-vitals', params);
+  return await request<WebVitalsResponse>('/api/web-vitals', params);
 }
 
 /**
@@ -38,32 +38,32 @@ export async function getWebVitals(params: WebVitalsRequest): Promise<WebVitalsR
  * @throws Error if the request fails or times out
  */
 async function request<T>(url: string, body: object): Promise<T> {
-    const controller = new AbortController();
-    const signal = controller.signal;
+  const controller = new AbortController();
+  const signal = controller.signal;
 
-    const timeout = window.setTimeout(() => controller.abort(), REJECT_TIMESTAMP_MS);
+  const timeout = window.setTimeout(() => controller.abort(), REJECT_TIMESTAMP_MS);
 
-    try {
-        const res = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(body),
-            signal,
-        });
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+      signal,
+    });
         
-        if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-        
-        return await res.json() as T;
-    } catch (e: unknown) {
-        controller.abort();
-        console.error('API request failed:', e);
-        throw e; // Re-throw to allow handling in the component
-    } finally {
-        clearTimeout(timeout);
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
     }
+        
+    return await res.json() as T;
+  } catch (e: unknown) {
+    controller.abort();
+    console.error('API request failed:', e);
+    throw e; // Re-throw to allow handling in the component
+  } finally {
+    clearTimeout(timeout);
+  }
 }

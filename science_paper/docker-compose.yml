@@ -12,3 +12,9 @@ services:
     environment:
       - NODE_ENV=production
       - CHROME_PATH=/usr/bin/google-chrome
+    shm_size: '2gb'
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G

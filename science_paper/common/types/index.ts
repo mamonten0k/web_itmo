@@ -1,6 +1,6 @@
 import {type Options, type LaunchedChrome} from 'chrome-launcher';
-import {type Browser, type Page, type CDPSession} from 'puppeteer';
 import {type Config} from 'lighthouse';
+import {type Browser, type Page, type CDPSession} from 'puppeteer';
 
 export enum ThrottleType {
     FAST_3G,
@@ -16,7 +16,7 @@ export enum Modifiers {
     ADD_LIGHTHOUSE_REPORT,
 };
 
-export type WebVitalsParams = {
+export interface WebVitalsParams {
     browser: Browser,
     chrOptions: Options,
     lhParams: {url: string, config: Config},
