@@ -1,10 +1,12 @@
 # CI/CD Pipeline Setup Guide
 
-This guide explains how to set up the CI/CD pipeline for the Science Paper project. The pipeline will:
+This guide explains how to set up the CI/CD pipeline for the Science Paper project, which is part of the larger web_itmo repository. The pipeline will:
 
-1. Run the linter on every push and pull request
+1. Run the linter on every push and pull request that affects the science_paper directory
 2. Build and push a Docker image to Docker Hub
 3. Deploy the updated image to your remote server
+
+> **Note:** Since this project is part of a larger repository, the CI/CD workflow is configured to only trigger when changes are made to files in the science_paper directory.
 
 ## Prerequisites
 

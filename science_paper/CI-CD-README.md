@@ -1,10 +1,12 @@
 # Science Paper CI/CD Pipeline
 
-This repository includes a complete CI/CD (Continuous Integration/Continuous Deployment) pipeline setup that:
+This project, which is part of the larger web_itmo repository, includes a complete CI/CD (Continuous Integration/Continuous Deployment) pipeline setup that:
 
-1. **Runs the linter** on every push and pull request
+1. **Runs the linter** on every push and pull request that affects the science_paper directory
 2. **Builds and pushes** a Docker image to Docker Hub
 3. **Deploys** the updated image to a remote server via SSH
+
+> **Note:** The CI/CD workflow is configured to only trigger when changes are made to files in the science_paper directory.
 
 ## Quick Start
 
@@ -16,7 +18,7 @@ To set up the CI/CD pipeline:
 
 ## Files Included
 
-- `.github/workflows/ci-cd.yml` - GitHub Actions workflow file
+- `../.github/workflows/science-paper-ci-cd.yml` - GitHub Actions workflow file (at repository root level)
 - `server-docker-compose.yml` - Docker Compose file for the server
 - `server-setup.sh` - Script to prepare your server for deployment
 - `CI-CD-SETUP.md` - Detailed setup instructions
