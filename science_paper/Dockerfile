@@ -29,7 +29,7 @@ RUN mkdir -p /home/chromeuser/.cache/chrome && \
 RUN echo 'kernel.unprivileged_userns_clone=1' > /etc/sysctl.d/00-local-userns.conf
 
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install --only=production --ignore-scripts
 
 COPY --from=builder /usr/src/app/dist ./dist
 COPY --from=builder /usr/src/app/config/.env ./

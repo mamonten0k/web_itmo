@@ -1,4 +1,4 @@
-import type {ThrottleType, Modifiers} from '../../common/types';
+import {ThrottleType, Modifiers} from '../../common/types';
 import {REJECT_TIMESTAMP_MS} from '../common/constants';
 
 // Define types for API requests and responses

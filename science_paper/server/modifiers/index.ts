@@ -1,6 +1,7 @@
 import lighthouse, {generateReport} from 'lighthouse';
 
-import type {WebVitalsParams, ThrottleType} from '../../common/types';
+import type {WebVitalsParams} from '../../common/types';
+import {ThrottleType} from '../../common/types';
 
 // Represented in bytes per second.
 const loadMultiplier = 1024 / 8 * .8;

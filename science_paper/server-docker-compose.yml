@@ -3,7 +3,7 @@ version: '3.8'
 services:
   web:
     platform: linux/amd64
-    image: ${DOCKER_USERNAME}/science_paper:latest  # Will be replaced with your Docker Hub username
+    image: ${DOCKER_USERNAME}/science_paper:latest
     ports:
       - "3000:3000"
     environment:
