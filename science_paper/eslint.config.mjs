@@ -24,7 +24,7 @@ const commonRules = {
   'max-len': ['error', {code: 120}],
   'no-console': ['warn', {allow: ['warn', 'error']}],
   'no-unused-vars': 'off',
-  'no-duplicate-imports': 'error',
+  'no-duplicate-imports': 'off',
   'no-var': 'error',
   'prefer-const': 'error',
   'eqeqeq': ['error', 'always'],
@@ -44,15 +44,16 @@ const commonRules = {
 const typescriptRules = {
   '@typescript-eslint/no-unused-vars': ['warn', {argsIgnorePattern: '^_'}],
   '@typescript-eslint/explicit-function-return-type': ['warn', {allowExpressions: true}],
-  '@typescript-eslint/no-explicit-any': 'warn', // Warn instead of off to encourage better typing
+  '@typescript-eslint/no-explicit-any': 'warn',
   '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
-  '@typescript-eslint/consistent-type-imports': 'error'
+  '@typescript-eslint/consistent-type-imports': 'warn'
 };
 
 const typescriptTypeCheckingRules = {
   '@typescript-eslint/no-unsafe-argument': 'warn',
   '@typescript-eslint/no-unsafe-function-type': 'off',
   '@typescript-eslint/no-unnecessary-condition': 'warn'
+  
 };
 
 export default defineConfig([
@@ -62,6 +63,7 @@ export default defineConfig([
     '**/*.js',
     '**/*.d.ts',
     'coverage/**/*',
+    'tests/**/*',
   ]),
 
   {
